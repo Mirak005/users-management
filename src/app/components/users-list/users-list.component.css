@@ -1,0 +1,21 @@
+table,
+.mat-spinner {
+  width: 90%;
+  margin: 4rem auto;
+}
+
+.mat-column-id,
+.mat-column-edit,
+.mat-column-delete {
+  width: 10%;
+}
+
+.mat-column-edit,
+.mat-column-delete {
+  cursor: pointer;
+}
+
+.mat-column-edit:hover,
+.mat-column-delete:hover {
+  opacity: 0.5;
+}

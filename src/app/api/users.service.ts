@@ -3,17 +3,33 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 import { IUser } from '../models/User';
 
-
 @Injectable({
   providedIn: 'root',
 })
-
 export class InMemUserService implements InMemoryDbService {
   createDb() {
-    let users = [
-      { firstName: "Karim", lastName: "Gharbi", email: "karim@gmail.com", address: "88 rue beskra mourouj", id: 0 },
-      { firstName: "Yosr", lastName: "Lassoued", email: "yosr@gmail.com", address: "imeuble narjess ariana", id: 1 },
-      { firstName: "Hejer", lastName: "Laouani", email: "hejer@gmail.com", address: "cité les canards raoued", id: 2 }
+    let users: IUser[] = [
+      {
+        firstName: 'Karim',
+        lastName: 'Gharbi',
+        email: 'karim@gmail.com',
+        address: '88 rue beskra mourouj',
+        id: 0,
+      },
+      {
+        firstName: 'Yosr',
+        lastName: 'Lassoued',
+        email: 'yosr@gmail.com',
+        address: 'immeuble narjess ariana',
+        id: 1,
+      },
+      {
+        firstName: 'Hejer',
+        lastName: 'Laouani',
+        email: 'hejer@gmail.com',
+        address: 'cité les canards raoued',
+        id: 2,
+      },
     ];
     return { users };
   }

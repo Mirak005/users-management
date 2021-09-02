@@ -1,0 +1,13 @@
+.alert-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: auto 1rem;
+}
+
+.success-icon {
+  color: green;
+}
+.error-icon {
+  color: red;
+}

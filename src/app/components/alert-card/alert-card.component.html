@@ -1,0 +1,5 @@
+<div class="alert-container">
+  <p>{{ message }}</p>
+  <mat-icon *ngIf="!isError" class="success-icon"> check_circle </mat-icon>
+  <mat-icon *ngIf="isError" class="error-icon"> error_outline </mat-icon>
+</div>

@@ -15,7 +15,16 @@ import { DialogService } from "src/app/services/dialog.service";
 })
 export class UsersListComponent implements OnInit {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'address', 'id', 'edit', 'delete'];
+
+  displayedColumns: string[] = [
+    'firstName',
+    'lastName',
+    'email',
+    'address',
+    'id',
+    'edit',
+    'delete'
+  ];
   dataSource: IUser[] = [];
   loading: boolean = true;
 
@@ -28,12 +37,6 @@ export class UsersListComponent implements OnInit {
   ) { }
 
 
-
-
-
-
-
-
   ngOnInit(): void {
     this.getUsers()
   }
@@ -42,10 +45,10 @@ export class UsersListComponent implements OnInit {
   getUsers(): void {
 
     this.usersService.getUsers().subscribe(users => {
-      console.log(users)
       this.dataSource = users
       this.loading = false;
     })
+
   }
 
 
@@ -54,12 +57,14 @@ export class UsersListComponent implements OnInit {
 
     this.dialogService.confirmRemoveUser().afterClosed().subscribe(result => {
 
-      if (!result.status) {
-        return
+      if (!result || !result.status) {
+        return;
       }
 
       this.usersService.removeUser(user).subscribe(() => {
-        this.dataSource = this.dataSource.filter(item => item.id !== user.id)
+
+        this.dataSource = this.dataSource.filter(item => item.id !== user.id);
+
       })
     })
 
@@ -70,15 +75,34 @@ export class UsersListComponent implements OnInit {
   updateUser(user: IUser): void {
 
     this.dialogService.openEditUser(user).afterClosed().subscribe(result => {
-      if (!result.status) {
+      if (!result || !result.status) {
         return;
       }
 
       this.usersService.editUser(result.data).subscribe(_ => {
-        this.dataSource = this.dataSource.map(user => user.id === result.data.id ? result.data : user)
-      })
+        this.dataSource = this.dataSource.map(user => user.id === result.data.id ? result.data : user);
+      });
 
-    })
+    });
+  };
+
+
+
+  addUser() {
+
+    this.dialogService.openAddUser().afterClosed().subscribe(result => {
+      if (!result || !result.status) {
+        return;
+      }
+
+      this.usersService.addUser(result.data)
+        .subscribe(newUser => {
+          this.dataSource = [...this.dataSource, newUser]
+        })
+
+    });
+
   }
+
 
 }

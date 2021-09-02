@@ -1,0 +1,11 @@
+.user-form-container,
+.user-form-container > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-form-container > form button {
+  margin: 10px;
+}

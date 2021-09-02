@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IUser } from 'src/app/models/User';
 
 
 
@@ -13,11 +12,13 @@ import { IUser } from 'src/app/models/User';
 })
 export class UserFormComponent {
 
+
+  formTitle: string = "New User";
   userData: FormGroup = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    address: new FormControl(''),
-    email: new FormControl('')
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email])
   });
 
 
@@ -29,11 +30,12 @@ export class UserFormComponent {
   ngOnInit(): void {
 
     if (this.data) {
+      this.formTitle = "Edit User"
       this.userData = new FormGroup({
-        firstName: new FormControl(this.data.firstName),
-        lastName: new FormControl(this.data.lastName),
-        address: new FormControl(this.data.address),
-        email: new FormControl(this.data.email),
+        firstName: new FormControl(this.data.firstName, [Validators.required]),
+        lastName: new FormControl(this.data.lastName, [Validators.required]),
+        address: new FormControl(this.data.address, [Validators.required]),
+        email: new FormControl(this.data.email, [Validators.required, Validators.email]),
       })
     }
 
@@ -41,14 +43,19 @@ export class UserFormComponent {
 
 
 
-  setConfirmStatus(status: boolean, data?: any) {
+  onConfrimClick() {
 
 
-    this.dialogRef.close({ status, data: data && { ...data.value, id: this.data.id } })
+    this.dialogRef.close({
+      status: true,
+      data: this.data ?
+        { ...this.userData.value, id: this.data.id } :
+        this.userData.value
+    })
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({ status: false });
   }
 
 }

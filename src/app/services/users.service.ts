@@ -59,7 +59,7 @@ export class UsersService {
    * @desc add user 
    */
 
-  addUser(newUser: IUser): Observable<any> {
+  addUser(newUser: any): Observable<any> {
 
     return this.http.post(this.usersURL, newUser, this.httpOptions)
 

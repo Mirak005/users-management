@@ -15,6 +15,7 @@ export class DialogService {
 
 
   confirmRemoveUser(): MatDialogRef<any> {
+
     return this.dialog.open(ConfirmDeleteComponent, {
       width: '400px',
     });
@@ -23,11 +24,22 @@ export class DialogService {
 
 
   openEditUser(user: IUser): MatDialogRef<any> {
+
     return this.dialog.open(UserFormComponent, {
       width: '400px',
       data: { ...user }
     });
 
+  }
+
+
+  openAddUser(): MatDialogRef<any> {
+
+    return this.dialog.open(UserFormComponent, {
+      width: '400px',
+    });
 
   }
+
+
 }

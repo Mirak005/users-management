@@ -1,34 +1,76 @@
-<form [formGroup]="userData" (ngSubmit)="setConfirmStatus(true, userData)">
-  <!-- NAME -->
+<div class="user-form-container">
+  <h4>{{ formTitle }}</h4>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input formControlName="firstName" matInput placeholder="Name" type="text" required />
-  </mat-form-field>
+  <form [formGroup]="userData" (ngSubmit)="onConfrimClick()">
+    <!-- NAME -->
 
-  <!-- LAST NAME -->
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input
+        formControlName="firstName"
+        matInput
+        placeholder="Name"
+        type="text"
+        required
+      />
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Last Name</mat-label>
-    <input formControlName="lastName" matInput placeholder="Last Name" type="text" required />
-  </mat-form-field>
+    <!-- LAST NAME -->
 
-  <!-- Email  -->
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input
+        formControlName="lastName"
+        matInput
+        placeholder="Last Name"
+        type="text"
+        required
+      />
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Email</mat-label>
-    <input formControlName="email" matInput placeholder="Email" type="email" required />
-  </mat-form-field>
+    <!-- Email  -->
 
-  <!-- Address  -->
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        formControlName="email"
+        matInput
+        placeholder="Email"
+        type="email"
+        required
+      />
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Address</mat-label>
-    <input formControlName="address" matInput placeholder="Address" type="text" required />
-  </mat-form-field>
+    <!-- Address  -->
 
-  <div>
-    <button mat-raised-button color="primary">Confirm</button>
-    <button mat-raised-button color="warn" type="button" (click)="setConfirmStatus(false)">Cancel</button>
-  </div>
-</form>
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input
+        formControlName="address"
+        matInput
+        placeholder="Address"
+        type="text"
+        required
+      />
+    </mat-form-field>
+
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!userData.valid"
+      >
+        Confirm
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="onNoClick()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

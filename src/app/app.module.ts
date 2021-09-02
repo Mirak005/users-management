@@ -8,7 +8,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -16,14 +19,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { InMemUserService } from "./api/users.service";
-import { UserFormComponent } from './components/user-form/user-form.component'
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     UsersListComponent,
-    UserFormComponent
+    UserFormComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +38,13 @@ import { UserFormComponent } from './components/user-form/user-form.component'
     MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemUserService, { delay: 100 })
+    HttpClientInMemoryWebApiModule.forRoot(InMemUserService, { delay: 100 }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

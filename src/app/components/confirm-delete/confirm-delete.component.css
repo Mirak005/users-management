@@ -1,0 +1,8 @@
+.confrimation-container {
+  padding: 0.5rem 1rem;
+}
+
+.confrimation-action {
+  display: flex;
+  justify-content: space-around;
+}

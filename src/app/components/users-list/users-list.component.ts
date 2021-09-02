@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { UsersService } from "src/app/services/users.service";
 import { IUser } from "../../models/User"
+import { DialogService } from "src/app/services/dialog.service";
 
 
 
@@ -21,8 +22,14 @@ export class UsersListComponent implements OnInit {
 
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private dialogService: DialogService
+
   ) { }
+
+
+
+
 
 
 
@@ -44,8 +51,33 @@ export class UsersListComponent implements OnInit {
 
 
   removeUser(user: IUser): void {
-    this.usersService.removeUser(user).subscribe(() => {
-      this.dataSource = this.dataSource.filter(item => item.id !== user.id)
+
+    this.dialogService.confirmRemoveUser().afterClosed().subscribe(result => {
+
+      if (!result.status) {
+        return
+      }
+
+      this.usersService.removeUser(user).subscribe(() => {
+        this.dataSource = this.dataSource.filter(item => item.id !== user.id)
+      })
+    })
+
+  }
+
+
+
+  updateUser(user: IUser): void {
+
+    this.dialogService.openEditUser(user).afterClosed().subscribe(result => {
+      if (!result.status) {
+        return;
+      }
+
+      this.usersService.editUser(result.data).subscribe(_ => {
+        this.dataSource = this.dataSource.map(user => user.id === result.data.id ? result.data : user)
+      })
+
     })
   }
 
